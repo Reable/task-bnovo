@@ -55,7 +55,6 @@ class GuestController extends Controller
         if(!$validate["success"]){
             return response()->error([
                 "message" => "Key {$validate['key']} is required",
-                "value" => $validate["value"]
             ], 409);
         }
 
@@ -102,7 +101,12 @@ class GuestController extends Controller
         if(!$validate["success"]){
             return response()->error([
                 "message" => "Key {$validate['key']} is required",
-                "value" => $validate["value"]
+            ], 409);
+        }
+
+        if(gettype($data["id"]) != "integer"){
+            return response()->error([
+                "message" => "Key id is not numeric",
             ], 409);
         }
 
@@ -113,7 +117,7 @@ class GuestController extends Controller
         if(count($quest) < 1){
             return response()->error([
                 "message" => "Not found guest"
-            ], 409);
+            ], 404);
         }
 
         $arr = [];
@@ -167,7 +171,6 @@ class GuestController extends Controller
         if(!$validate["success"]){
             return response()->error([
                 "message" => "Key {$validate['key']} is required",
-                "value" => $validate["value"]
             ], 409);
         }
 
@@ -178,7 +181,7 @@ class GuestController extends Controller
         if(count($quest) < 1){
             return response()->error([
                 "message" => "Not found guest"
-            ], 409);
+            ], 404);
         }
 
         $db::table("guests")->where(["id"=>$data["id"]])->delete();

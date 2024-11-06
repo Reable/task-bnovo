@@ -22,7 +22,7 @@ class Validator {
         }
 
         return [
-            "success" => true,
+            "success" => true
         ];
     }
 
